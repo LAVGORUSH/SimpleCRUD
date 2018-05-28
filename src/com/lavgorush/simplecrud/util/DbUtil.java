@@ -1,5 +1,6 @@
 package com.lavgorush.simplecrud.util;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,15 +10,15 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DbUtil {
-	private static Connection connection = null;
+    private static Connection connection = null;
 
     public static Connection getConnection() {
         if (connection != null)
             return connection;
         else {
             try {
-            	Properties prop = new Properties();
-                InputStream inputStream = DbUtil.class.getClassLoader().getResourceAsStream("/resourses/db.properties");
+                Properties prop = new Properties();
+                InputStream inputStream = new FileInputStream("D:/Java/SimpleCRUD/resources/db.properties");
                 prop.load(inputStream);
                 String driver = prop.getProperty("driver");
                 String url = prop.getProperty("url");
@@ -36,6 +37,5 @@ public class DbUtil {
             }
             return connection;
         }
-
     }
 }
